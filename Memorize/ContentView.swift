@@ -7,17 +7,48 @@
 
 import SwiftUI
 
-struct ContentView: View {
-    var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+struct ContentView: View {  // Behaves like a view.
+    var body: some View {   // Run this code and return Any View
+        
+        HStack {
+            CardView(isFaceUp: true)
+            CardView()
+            CardView()
+            CardView()
         }
-        .padding()
+            .foregroundColor(.orange)
+            .padding()
+        }
+    }
+
+struct CardView : View {
+    var isFaceUp: Bool = false
+    
+    var body: some View {
+        ZStack {            // Computed Property - It's not stored somewhere it's computed.
+            
+            if isFaceUp {
+                RoundedRectangle(cornerRadius: 12)
+                    .foregroundColor(.white)
+                
+                RoundedRectangle(cornerRadius: 12)
+                    .strokeBorder(lineWidth: 2)
+                Text("🧿")
+                    .font(.largeTitle)
+            }
+            else {
+                RoundedRectangle(cornerRadius: 12)
+            }
+        }
     }
 }
+
+// Creating instances of structs
+// Named Parameters
+// Parameter Defaults
+// So Vstack is also same as image or text
+
+
 
 #Preview {
     ContentView()
