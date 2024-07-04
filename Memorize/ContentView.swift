@@ -10,12 +10,14 @@ import SwiftUI
 struct ContentView: View {  // Behaves like a view.
     var body: some View {   // Run this code and return Any View
         
+        let emojis = ["💎","🌀","❤️","🍪","🙏"]
+        
         HStack {
-            CardView()
-            CardView()
-            CardView()
-            CardView()
-            CardView()
+            ForEach(emojis.indices, id: \.self) { index in
+                CardView(content: emojis[index])
+                
+            }
+            
             
         }
             .foregroundColor(.orange)
@@ -24,7 +26,8 @@ struct ContentView: View {  // Behaves like a view.
     }
 
 struct CardView : View {
-    @State var isFaceUp = true
+    let content: String
+    @State var isFaceUp = false
     
     var body: some View {
         ZStack {            // Computed Property - It's not stored somewhere it's computed.
@@ -32,7 +35,7 @@ struct CardView : View {
             if isFaceUp {
                 base.fill(.white)
                 base.strokeBorder(lineWidth: 2)
-                Text("💎")
+                Text(content)
                     .font(.largeTitle)
             }
             else {
