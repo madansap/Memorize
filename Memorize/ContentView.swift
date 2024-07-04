@@ -11,10 +11,12 @@ struct ContentView: View {  // Behaves like a view.
     var body: some View {   // Run this code and return Any View
         
         HStack {
-            CardView(isFaceUp: true)
             CardView()
             CardView()
             CardView()
+            CardView()
+            CardView()
+            
         }
             .foregroundColor(.orange)
             .padding()
@@ -22,26 +24,28 @@ struct ContentView: View {  // Behaves like a view.
     }
 
 struct CardView : View {
-    var isFaceUp: Bool = false
+    @State var isFaceUp = true
     
     var body: some View {
         ZStack {            // Computed Property - It's not stored somewhere it's computed.
-            
+            let base = RoundedRectangle(cornerRadius: 12)
             if isFaceUp {
-                RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.white)
-                
-                RoundedRectangle(cornerRadius: 12)
-                    .strokeBorder(lineWidth: 2)
+                base.fill(.white)
+                base.strokeBorder(lineWidth: 2)
                 Text("💎")
                     .font(.largeTitle)
             }
             else {
-                RoundedRectangle(cornerRadius: 12)
+                base.fill()
             }
+        }
+        .onTapGesture {
+            isFaceUp.toggle()
         }
     }
 }
+
+
 
 // Creating instances of structs
 // Named Parameters
